@@ -1,0 +1,98 @@
+<div *ngIf="loading" class="produto-container-loading">Carregando...</div>
+
+<div *ngIf="!loading && !product" class="produto-container-loading">
+  Produto não encontrado.
+</div>
+
+<div *ngIf="!loading && product" class="produto-container">
+  
+  <div class="produto-layout">
+    <div class="produto-imagem">
+      <img [src]="product.image" [alt]="product.name" />
+    </div>
+    
+    <div class="produto-info">
+      <h1 class="produto-nome">{{ product.name }}</h1>
+      
+      <div class="produto-preco">
+        <span *ngIf="product.oldPrice" class="old-price">
+          {{ product.oldPrice }}
+        </span>
+        <span class="current-price">R$ {{ product.price }}</span>
+      </div>
+
+      <app-star-rating [rating]="product.rating"></app-star-rating>
+      
+      <p class="produto-descricao-curta">
+        {{ product.descricao_curta }}
+      </p>
+
+      <p class="produto-estoque">
+        {{ product.estoque ? product.estoque + ' em estoque' : 'Disponível' }}
+      </p>
+      
+      <div class="produto-acoes">
+        <div class="quantity-selector">
+          <button (click)="decreaseQty()">-</button>
+          <input type="text" [(ngModel)]="quantity" readonly />
+          <button (click)="increaseQty()">+</button>
+        </div>
+        <button class="add-to-cart" (click)="handleAddToCart()">
+          Adicionar ao carrinho
+        </button>
+      </div>
+      
+      <div class="produto-meta">
+        <span>SKU: {{ product.sku }}</span>
+        <span>Categoria: {{ product.categoria }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="produto-abas">
+    
+    <div class="aba-descricao">
+      <h2>Descrição</h2>
+      <p style="white-space: pre-wrap;">{{ product.descricao_longa }}</p>
+      <p><strong>Material do Produto:</strong> {{ product.material }}</p>
+    </div>
+
+    <div class="aba-avaliacoes">
+      <h2>Avaliações ({{ reviews.length }})</h2>
+      <p *ngIf="reviews.length === 0">Não há avaliações ainda.</p>
+      
+      <div class="review-form-container">
+        <h3>Seja o primeiro a avaliar "{{ product.name }}"</h3>
+        <p>O seu endereço de e-mail não será publicado. Campos obrigatórios são marcados com *</p>
+        
+        <form (ngSubmit)="handleSubmitReview(reviewForm)" #reviewForm="ngForm" class="review-form">
+          <label>Sua avaliação *</label>
+          <app-star-rating 
+            [rating]="reviewRating" 
+            (ratingChange)="reviewRating = $event"
+          ></app-star-rating>
+          
+          <label for="review-nome">Nome *</label>
+          <input 
+            type="text" 
+            id="review-nome" 
+            [(ngModel)]="reviewName"
+            name="reviewName"
+            required 
+          />
+          
+          <label for="review-email">E-mail *</label>
+          <input 
+            type="email" 
+            id="review-email" 
+            [(ngModel)]="reviewEmail"
+            name="reviewEmail"
+            required 
+          />
+          
+          <button type="submit" class="form-button">Enviar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

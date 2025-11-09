@@ -1,0 +1,29 @@
+<div *ngIf="item" class="cart-item">
+  <img [src]="item.image" [alt]="item.name" class="cart-item-image" />
+  
+  <div class="cart-item-details">
+    <h3 class="cart-item-name">{{ item.name }}</h3>
+    
+    <span 
+      class="cart-item-stock" 
+      [class.in-stock]="item.estoque > 0"
+      [class.out-of-stock]="item.estoque <= 0"
+    >
+      {{ item.estoque > 0 ? 'Em estoque' : 'Fora de Estoque' }}
+    </span>
+    
+    <span class="cart-item-option">Opção de presente: "Indisponível"</span>
+    
+    <div *ngIf="item.estoque > 0" class="cart-quantity-selector">
+      <button (click)="handleDecrease()">-</button>
+      <input type="text" [value]="item.quantity" readonly />
+      <button (click)="handleIncrease()">+</button>
+    </div>
+  </div>
+  
+  <div class="cart-item-price">
+    R$ {{ item.price }}
+  </div>
+  
+  <button (click)="handleRemove()" class="cart-item-remove">×</button>
+</div>

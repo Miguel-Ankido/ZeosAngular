@@ -1,0 +1,10 @@
+.star-rating {
+  color: #f8b400; /* Cor amarela/laranja para as estrelas */
+  margin-bottom: 6px;
+}
+
+/* Se não tiver nota, ocupa espaço para não quebrar o layout */
+.star-rating.empty {
+  height: 1em; /* Altura de uma linha de texto */
+  margin-bottom: 6px;
+}

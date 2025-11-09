@@ -1,0 +1,94 @@
+/* Container principal (igual ao /sobre) */
+.ajuda-container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 32px 16px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+/* Título "Ajuda" */
+.main-title {
+  font-size: 1.75rem;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+/* "Cartão" branco para o conteúdo */
+.ajuda-content {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 30px 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* --- Estilo do Acordeão (FAQ) --- */
+
+.faq-item {
+  border-bottom: 1px solid #eee;
+  padding: 15px 0;
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+}
+
+/* A pergunta clicável */
+.faq-question {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #555;
+  cursor: pointer;
+  list-style: none; /* Remove a setinha padrão */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Seta (feita com CSS) */
+.faq-question::after {
+  content: '+';
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #777;
+  transition: transform 0.2s;
+}
+
+/* Quando o item está aberto */
+.faq-item[open] .faq-question::after {
+  content: '−'; /* Muda para o sinal de menos */
+  transform: rotate(180deg);
+}
+
+.faq-item[open] .faq-question {
+  color: #333;
+}
+
+/* A resposta (que aparece) */
+.faq-answer {
+  padding: 15px 0 0 10px; /* Leve recuo */
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.faq-answer p {
+  margin-bottom: 10px;
+}
+
+/* Estilo para o link de login */
+.faq-answer a {
+  color: #007bff; /* Cor padrão de link azul */
+  text-decoration: underline;
+}

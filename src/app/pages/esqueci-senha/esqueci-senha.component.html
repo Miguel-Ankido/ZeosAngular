@@ -1,0 +1,25 @@
+<div class="esqueci-container">
+  <div class="esqueci-box">
+    <h1 class="main-title">Recuperar Senha</h1>
+    
+    <form>
+      <p class="reset-info">
+        Perdeu sua senha? Por favor, digite seu nome de usuário ou e-mail. Você receberá um link para criar uma nova senha por e-mail.
+      </p>
+
+      <label for="reset-email">Nome de usuário ou e-mail *</label>
+      <input 
+        type="email" 
+        id="reset-email"
+        required 
+        placeholder='Insira seu e-mail...'
+      />
+      
+      <button type="submit" class="form-button">Redefinir senha</button>
+      
+      <a routerLink="/login" class="back-to-login">
+        Lembrou a senha? Faça login
+      </a>
+    </form>
+  </div>
+</div>

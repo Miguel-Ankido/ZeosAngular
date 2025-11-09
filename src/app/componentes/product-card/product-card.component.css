@@ -1,0 +1,63 @@
+/* Embrulha o card (Link) */
+.product-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* O card individual */
+.product-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  font-family: Arial, sans-serif;
+  
+  /* Fundo branco, borda, etc. */
+  background-color: #fff; 
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s ease; 
+}
+.product-card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-image-container {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: #f9f9f9; 
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-name {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #333; 
+  font-weight: 500;
+}
+
+.product-pricing {
+  margin-top: 6px;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #999; 
+  font-size: 0.85rem;
+  margin-right: 8px;
+}
+
+.current-price {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #333; 
+}

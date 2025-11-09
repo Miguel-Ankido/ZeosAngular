@@ -1,0 +1,22 @@
+.product-list {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.list-title {
+  font-family: Arial, sans-serif;
+  font-size: 1.5rem; /* 24px */
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.product-grid {
+  display: grid;
+  /* Cria 4 colunas de tamanho igual */
+  grid-template-columns: repeat(4, 1fr);
+  /* Espaçamento entre os cards */
+  gap: 24px;
+}

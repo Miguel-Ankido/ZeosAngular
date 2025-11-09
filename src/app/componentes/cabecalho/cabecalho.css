@@ -1,0 +1,148 @@
+/* Fundo e padding do cabeçalho */
+.app-header {
+  width: 100%;
+  padding: 0 5%; 
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+  box-sizing: border-box; 
+  font-family: Arial, sans-serif;
+}
+
+/* --- 1. CORREÇÃO DO LAYOUT QUEBRADO --- */
+.header-top {
+  display: flex; /* <-- ISSO ALINHA OS ITENS LADO A LADO */
+  justify-content: space-between; 
+  align-items: center;
+  padding: 16px 0;
+  height: 80px; 
+}
+
+.logo-img {
+  height: 193px; 
+  width: auto;
+  object-fit: contain;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 0.9rem;
+  color: #555;
+  white-space: nowrap; 
+}
+
+/* --- 2. ESTILO DA BARRA DE PESQUISA IDÊNTICA --- */
+
+/* A "caixa" que segura o input e o botão */
+.search-bar {
+  display: flex; /* Alinha o input e o botão lado a lado */
+  flex-grow: 1; 
+  margin: 0 40px;
+  max-width: 600px;
+  
+  /* 1. A borda cinza em volta de TUDO */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  /* 2. Esconde qualquer parte que "vaze" (como cantos do input) */
+  overflow: hidden; 
+}
+
+/* O campo de digitação */
+.search-bar input {
+  width: 100%;
+  /* 3. Remove a borda padrão do input */
+  border: none;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  /* 4. Remove a borda azul ao clicar */
+  outline: none;
+  background-color: #fff; /* Fundo branco */
+}
+
+/* O botão "Buscar" */
+.search-bar button {
+  /* 5. Remove a borda padrão do botão */
+  border: none;
+  /* 6. O fundo escuro do botão (como na imagem) */
+  background-color: #555; /* Um cinza bem escuro */
+  /* 7. O texto "Buscar" em branco */
+  color: #fff;
+  padding: 0 20px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s; /* Efeito suave */
+}
+
+/* Efeito ao passar o mouse */
+.search-bar button:hover {
+  background-color: #333; /* Fica mais escuro */
+}
+
+/* --- 3. LINKS DE NAVEGAÇÃO (Home, Sobre...) --- */
+.header-nav {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 12px 0;
+  border-top: 1px solid #f0f0f0;
+}
+
+.header-nav a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+/* ... (outros estilos do header) ... */
+
+.app-header {
+  width: 100%;
+  padding: 0 5%; 
+  border-bottom: 1px solid #ddd;
+  box-sizing: border-box; 
+  font-family: Arial, sans-serif;
+  
+  /* ESTA É A SEGUNDA LINHA IMPORTANTE */
+  /* Define o fundo do header como um cinza quase branco */
+  background-color: #f9f9f9; 
+}
+
+/* ... (resto do .header-top, .search-bar, etc) ... */
+
+/* ... (todo o seu CSS anterior) ... */
+
+.header-actions {
+  /* ... (gap, align-items, etc.) ... */
+  font-size: 1rem; /* Aumenta um pouco o tamanho para o ícone */
+}
+
+/* Estiliza os links de ação (Usuário, Carrinho) */
+.action-link {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* Espaço entre o ícone e o texto */
+  text-decoration: none;
+  color: #555;
+  transition: color 0.2s;
+}
+
+.action-link:hover {
+  color: #000;
+}
+
+.action-link svg {
+  font-size: 1.5rem; /* Tamanho do ícone */
+}
+/* ... (todo o seu CSS anterior) ... */
+
+/* Estilo para o link de Admin (opcional) */
+.admin-link {
+  color: #d9534f; /* Um tom de vermelho */
+}
+.admin-link:visited {
+  color: #d9534f;
+}
+.admin-link:hover {
+  color: #c9302c; /* Vermelho mais escuro no hover */
+}

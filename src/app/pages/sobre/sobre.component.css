@@ -1,0 +1,46 @@
+/* Container principal (centraliza) */
+.sobre-container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 32px 16px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+/* Título "Sobre Nós" (o maior) */
+.main-title {
+  font-size: 1.75rem; /* 28px */
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+/* "Cartão" branco para o conteúdo */
+.sobre-content {
+  background-color: #fff; /* Fundo branco do cartão */
+  border: 1px solid #ddd; /* Borda sutil */
+  border-radius: 8px; /* Cantos arredondados */
+  padding: 30px 40px; /* Mais preenchimento interno */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Sombra sutil */
+}
+
+.section-title {
+  font-size: 1.5rem; /* 24px */
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.sobre-content p {
+  font-size: 1.1rem; /* Fonte maior para leitura */
+  color: #555;
+  line-height: 1.7; /* Mais espaço entre linhas */
+  margin-bottom: 20px; /* Mais espaço entre parágrafos */
+}
+
+/* Remove a margem do último parágrafo */
+.sobre-content p:last-child {
+  margin-bottom: 0;
+}

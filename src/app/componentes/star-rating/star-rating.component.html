@@ -1,0 +1,18 @@
+<div 
+  *ngIf="ratingChange.observed" 
+  class="star-rating interactive"
+  (mouseleave)="resetHover()"
+>
+  <span *ngFor="let starValue of interactiveStars"
+    (mouseenter)="setHover(starValue)"
+    (click)="setRating(starValue)"
+  >
+    <fa-icon [icon]="(hoverRating || rating) >= starValue ? faStar : faRegStar"></fa-icon>
+  </span>
+</div>
+
+<div *ngIf="!ratingChange.observed">
+  <div class="star-rating">
+    <fa-icon *ngFor="let starIcon of displayStars" [icon]="starIcon"></fa-icon>
+  </div>
+</div>

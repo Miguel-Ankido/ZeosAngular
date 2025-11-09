@@ -1,0 +1,7 @@
+/* Container (parecido com o que tínhamos no React) */
+.home-container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 32px 16px;
+  margin: 0 auto;
+}

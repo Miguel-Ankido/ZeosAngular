@@ -1,0 +1,31 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 40px;
+  font-family: Arial, sans-serif;
+}
+
+.page-link, .page-dots {
+  padding: 8px 14px;
+  text-decoration: none;
+  color: #555;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.page-link:hover {
+  background-color: #f0f0f0;
+}
+
+.page-link.current {
+  background-color: #333;
+  color: #fff;
+  border-color: #333;
+  font-weight: bold;
+}
+
+.page-dots {
+  border: none;
+}

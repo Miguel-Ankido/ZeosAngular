@@ -1,0 +1,17 @@
+<section class="product-list">
+  <h2 *ngIf="title" class="list-title">{{ title }}</h2>
+
+  <div class="product-grid">
+    <app-product-card
+      *ngFor="let product of products"
+      
+      [id]="product.id"
+      [image]="product.image"
+      [name]="product.name"
+      [oldPrice]="product.oldPrice"
+      [price]="product.price"
+      [rating]="product.rating"
+    >
+    </app-product-card>
+  </div>
+</section>

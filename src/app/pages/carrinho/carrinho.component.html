@@ -1,0 +1,51 @@
+<div class="cart-container">
+  
+  <div *ngIf="subtotal > 0 && subtotal < freteGratisMinimo" class="frete-aviso">
+    <strong>Aviso:</strong> Frete grátis a partir de R$ 400,00. 
+    Adicione mais R$ {{ faltaParaFrete.toFixed(2).replace('.', ',') }} no carrinho para obter o cupom.
+  </div>
+  
+  <div class="cart-layout">
+    
+    <main class="cart-items-list">
+      <h1>Carrinho De Compras</h1>
+      
+      <div *ngIf="(cartItems$ | async) as cartItems; else emptyCart">
+        <div *ngIf="cartItems.length > 0; else emptyCart">
+          
+          <app-cart-item 
+            *ngFor="let item of cartItems" 
+            [item]="item">
+          </app-cart-item>
+        
+        </div>
+      </div>
+      
+      <ng-template #emptyCart>
+        <div class="cart-empty">
+          <p>Seu carrinho está vazio.</p>
+          <a routerLink="/loja" class="form-button">Voltar para a Loja</a>
+        </div>
+      </ng-template>
+      
+    </main>
+    
+    <aside class="cart-summary">
+      <h3>Resumo</h3>
+      <div class="summary-row">
+        <span>Subtotal | {{ (cartItems$ | async)?.length }} Produtos:</span>
+        <span>R$ {{ subtotal.toFixed(2).replace('.', ',') }}</span>
+      </div>
+      
+      <div class="summary-total">
+        <span>Total:</span>
+        <span>R$ {{ subtotal.toFixed(2).replace('.', ',') }}</span>
+      </div>
+      
+      <a routerLink="/checkout" class="checkout-button">
+        Fechar Pedido
+      </a>
+    </aside>
+
+  </div>
+</div>
