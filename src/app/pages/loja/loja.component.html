@@ -3,8 +3,19 @@
   
   <div class="loja-content">
     
-    <app-product-list [products]="mockLojaData"></app-product-list>
+    <div *ngIf="loading" class="loja-status">
+      <h2>Carregando produtos...</h2>
+    </div>
 
-    <app-pagination></app-pagination>
+    <div *ngIf="!loading">
+      <app-product-list [products]="products"></app-product-list>
+
+      <app-pagination 
+        [currentPage]="currentPage"
+        [totalPages]="totalPages"
+        (pageChange)="onPageChange($event)"
+      ></app-pagination>
+    </div>
+
   </div>
 </div>

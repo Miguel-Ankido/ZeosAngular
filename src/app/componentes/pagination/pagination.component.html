@@ -1,10 +1,27 @@
 <nav class="pagination">
-  <a href="#" class="page-link current">1</a>
-  <a href="#" class="page-link">2</a>
-  <a href="#" class="page-link">3</a>
-  <a href="#" class="page-link">4</a>
-  <span class="page-dots">...</span>
-  <a href="#" class="page-link">58</a>
-  <a href="#" class="page-link">59</a>
-  <a href="#" class="page-link">60</a>
+  <button 
+    class="page-link"
+    (click)="goToPrev()" 
+    [disabled]="currentPage === 1"
+  >
+    &laquo;
+  </button>
+
+  <a 
+    *ngFor="let page of pages"
+    href="#"
+    class="page-link"
+    [class.current]="page === currentPage"
+    (click)="$event.preventDefault(); goToPage(page)"
+  >
+    {{ page }}
+  </a>
+
+  <button 
+    class="page-link"
+    (click)="goToNext()" 
+    [disabled]="currentPage === totalPages"
+  >
+    &raquo;
+  </button>
 </nav>

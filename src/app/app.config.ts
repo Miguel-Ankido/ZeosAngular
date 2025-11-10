@@ -4,16 +4,20 @@ import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideToastr } from 'ngx-toastr';
 
-// 1. IMPORTE O HTTPCLIENT
-import { provideHttpClient } from '@angular/common/http';
+// 1. IMPORTE O 'provideHttpClient' E O 'withFetch'
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideAnimationsAsync(),
-    provideToastr({ /* ...config... */ }),
+    provideToastr({
+      timeOut: 2000,
+      positionClass: 'toast-top-center',
+      preventDuplicates: true,
+    }),
     
-    // 2. ADICIONE AQUI
-    provideHttpClient() // Permite que o app faça chamadas de API
+    // 2. ADICIONE O 'withFetch()' AQUI
+    provideHttpClient(withFetch()) 
   ]
 };

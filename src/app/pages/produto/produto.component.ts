@@ -1,21 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Para *ngIf, *ngFor
-import { FormsModule } from '@angular/forms'; // Para o formulário de avaliação
-import { ActivatedRoute } from '@angular/router'; // Para ler o ID da URL
-import { ToastrService } from 'ngx-toastr'; // Para os toasts
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; // Para ícones (se precisar)
+import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core'; // 1. Importe PLATFORM_ID e Inject
+import { isPlatformBrowser, CommonModule } from '@angular/common'; // 2. Importe isPlatformBrowser e CommonModule
+import { FormsModule } from '@angular/forms'; 
+import { ActivatedRoute, RouterLink } from '@angular/router'; 
+import { ToastrService } from 'ngx-toastr'; 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; 
 
-// 1. Importe nossos "Cérebros"
+// 3. CORREÇÃO DA IMPORTAÇÃO (Caminho e Nome)
 import { ProductService, Produto } from '../../services/product.service';
 import { CartService } from '../../services/cart.service';
 
-// 2. Importe os componentes reutilizáveis
+// 4. CORREÇÃO DA IMPORTAÇÃO (Caminho e Nome)
 import { StarRatingComponent } from '../../componentes/star-rating/star-rating.component';
 
 @Component({
   selector: 'app-produto',
   standalone: true,
-  // 3. Imports necessários
   imports: [
     CommonModule, 
     FormsModule, 
@@ -27,30 +26,32 @@ import { StarRatingComponent } from '../../componentes/star-rating/star-rating.c
 })
 export class ProdutoComponent implements OnInit {
   
-  // 4. Estados
   product: Produto | null = null;
   reviews: any[] = [];
   loading: boolean = true;
   quantity: number = 1;
-
-  // 5. Estados do formulário de avaliação
   reviewRating: number = 0;
   reviewName: string = '';
   reviewEmail: string = '';
 
-  // 6. Injeção de Dependência (O "cérebro" do Angular)
+  private platformId: Object; // 5. Variável para guardar o platformId
+
   constructor(
-    private route: ActivatedRoute, // Para ler a URL
-    private productService: ProductService, // Para buscar produtos
-    private cartService: CartService, // Para o carrinho
-    private toastr: ToastrService // Para os toasts
-  ) {}
+    private route: ActivatedRoute,
+    private productService: ProductService,
+    private cartService: CartService,
+    private toastr: ToastrService,
+    @Inject(PLATFORM_ID) platformId: Object // 6. "Injeta" o PLATFORM_ID
+  ) {
+    this.platformId = platformId; // 7. Armazena o platformId
+  }
 
-  // 7. ngOnInit é o 'useEffect' do Angular que roda 1 vez
   ngOnInit(): void {
-    window.scrollTo(0, 0); // Rola para o topo
+    // 8. PROTEÇÃO DO 'window' (Só roda no navegador)
+    if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo(0, 0); // Rola para o topo
+    }
 
-    // Pega o ID da URL
     const id = this.route.snapshot.paramMap.get('id');
     if (!id) {
       this.toastr.error('Produto não encontrado.');
@@ -58,40 +59,46 @@ export class ProdutoComponent implements OnInit {
       return;
     }
 
-    // Busca os dados do produto
     this.productService.getProdutoById(id).subscribe({
       next: (data) => {
         this.product = data;
         this.loading = false;
-        // Pega o e-mail do usuário logado (se houver)
-        this.loadUserData();
+        this.loadUserData(); // Carrega os dados do usuário (se houver)
       },
       error: (err) => {
-        console.error(err);
+        console.error("Erro ao carregar produto:", err);
         this.toastr.error('Erro ao carregar o produto.');
         this.loading = false;
       }
     });
 
-    // Busca as avaliações
     this.fetchProductReviews(id);
   }
 
   loadUserData() {
-    const user = localStorage.getItem('user');
-    if (user && this.product) {
-      this.reviewEmail = JSON.parse(user).email;
-      this.reviewName = JSON.parse(user).nomeCompleto;
+    // 9. PROTEÇÃO DO 'localStorage' (Só roda no navegador)
+    if (isPlatformBrowser(this.platformId)) {
+      const user = localStorage.getItem('user');
+      if (user && this.product) {
+        const parsedUser = JSON.parse(user);
+        this.reviewEmail = parsedUser.email;
+        this.reviewName = parsedUser.nomeCompleto;
+      }
     }
   }
 
   fetchProductReviews(id: string) {
-    this.productService.getReviewsByProductId(id).subscribe(data => {
-      this.reviews = data;
+    this.productService.getReviewsByProductId(id).subscribe({
+      next: (data) => {
+        this.reviews = data;
+      },
+      error: (err) => {
+        console.error("Erro ao carregar avaliações:", err);
+        this.toastr.error("Erro ao carregar avaliações.");
+      }
     });
   }
 
-  // 8. Funções de Ação
   handleAddToCart() {
     if (!this.product) return;
     this.cartService.addToCart(this.product, this.quantity);
@@ -115,19 +122,17 @@ export class ProdutoComponent implements OnInit {
       next: () => {
         this.toastr.success('Avaliação enviada com sucesso!');
         if (this.product) this.fetchProductReviews(this.product.id);
-        // Limpa o formulário
         this.reviewRating = 0;
-        form.resetForm(); // Reseta o formulário
-        this.loadUserData(); // Recoloca os dados do usuário
+        form.resetForm(); 
+        this.loadUserData(); 
       },
       error: (err) => {
-        console.error(err);
+        console.error("Erro ao enviar avaliação:", err);
         this.toastr.error('Erro ao enviar avaliação.');
       }
     });
   }
 
-  // Funções do Seletor de Quantidade
   increaseQty() {
     if (this.product?.estoque && this.quantity < this.product.estoque) {
       this.quantity++;
@@ -135,6 +140,7 @@ export class ProdutoComponent implements OnInit {
       this.quantity++;
     }
   }
+  
   decreaseQty() {
     if (this.quantity > 1) this.quantity--;
   }

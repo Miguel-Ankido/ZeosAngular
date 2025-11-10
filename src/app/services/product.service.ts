@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'; // 1. Importa o HttpClient
-import { Observable } from 'rxjs'; // O "cérebro" reativo do Angular
+// 1. Importe o HttpResponse (necessário para a paginação)
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
-// (Vamos definir a "forma" de um Produto, pego do seu db.json)
+// (A sua interface 'Produto' está perfeita)
 export interface Produto {
   id: string;
   name: string;
@@ -22,28 +23,37 @@ export interface Produto {
   providedIn: 'root'
 })
 export class ProductService {
-  // 2. !! IMPORTANTE !! Cole a URL da sua API do Render aqui
   private API_URL = 'https://api-1-6p1t.onrender.com';
 
-  // 3. "Injeta" o HttpClient no serviço
   constructor(private http: HttpClient) { }
 
-  // 4. Função para buscar a lista de produtos (para a Home/Loja)
+  // Função para buscar TODOS os produtos (para a Home)
   getProdutos(): Observable<Produto[]> {
     return this.http.get<Produto[]>(`${this.API_URL}/produtos`);
   }
 
-  // 5. Função para buscar UM produto pelo ID (para a Página do Produto)
+  // --- A FUNÇÃO QUE ESTAVA FALTANDO ---
+  // 2. Função para a Página da Loja (com paginação)
+  getProdutosPaginados(page: number, limit: number): Observable<HttpResponse<Produto[]>> {
+    return this.http.get<Produto[]>(
+      `${this.API_URL}/produtos?_page=${page}&_limit=${limit}`,
+      { observe: 'response' } // Pede ao Angular para ler os Headers (X-Total-Count)
+    );
+  }
+  // --- FIM DA ADIÇÃO ---
+
+
+  // Função para buscar UM produto pelo ID (para a Página do Produto)
   getProdutoById(id: string): Observable<Produto> {
     return this.http.get<Produto>(`${this.API_URL}/produtos/${id}`);
   }
 
-  // 6. Função para buscar as avaliações de um produto
+  // Função para buscar as avaliações de um produto
   getReviewsByProductId(id: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.API_URL}/reviews?produtoId=${id}`);
   }
 
-  // 7. Função para ENVIAR uma avaliação
+  // Função para ENVIAR uma avaliação
   postReview(reviewData: any): Observable<any> {
     return this.http.post(`${this.API_URL}/reviews`, reviewData);
   }

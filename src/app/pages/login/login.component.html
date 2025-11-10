@@ -1,15 +1,16 @@
 <div class="login-container">
-      
   <div class="login-box">
     <h1 class="main-title">Entrar</h1>
     
-    <form>
+    <form (ngSubmit)="handleLogin()">
       <label for="username">Nome de usuário ou e-mail *</label>
       <input 
         type="email" 
         id="username" 
         required 
         placeholder="Insira o Usuário.."
+        name="email"
+        [(ngModel)]="email" 
       />
       
       <label for="password">Senha *</label>
@@ -18,10 +19,14 @@
         id="password" 
         required 
         placeholder="Insira a Senha.."
+        name="password"
+        [(ngModel)]="password" 
       />
       
       <div class="form-actions">
-        <button type="submit" class="form-button">Acessar</button>
+        <button type="submit" class="form-button" [disabled]="loading">
+          {{ loading ? 'Acessando...' : 'Acessar' }}
+        </button>
         <div class="remember-me">
           <input type="checkbox" id="remember" />
           <label for="remember">Lembrar de Mim</label>
