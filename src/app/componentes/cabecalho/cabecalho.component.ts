@@ -1,20 +1,42 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-
-// 1. Importe o Módulo e os Ícones
+import { CommonModule } from '@angular/common'; // Precisa disso para *ngIf
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faUser, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faShoppingCart, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'; // Importe os 3 ícones
+
+// Imports para o Login
+import { Observable } from 'rxjs';
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/user.model';
 
 @Component({
-  selector: 'app-cabecalho',
-  standalone: true,
-  // 2. Adicione o FontAwesomeModule e o RouterLink aos imports
-  imports: [FontAwesomeModule, RouterLink], 
-  templateUrl: './cabecalho.html',
-  styleUrl: './cabecalho.css' // (Já corrigido do Erro 1)
+  selector: 'app-cabecalho',
+  standalone: true,
+  imports: [
+    CommonModule, 
+    FontAwesomeModule, 
+    RouterLink
+  ], 
+  templateUrl: './cabecalho.html',
+  styleUrl: './cabecalho.css'
 })
 export class CabecalhoComponent {
-  // 3. Exponha os ícones para o HTML
-  faUser = faUser;
-  faShoppingCart = faShoppingCart;
+  // Exponha os 3 ícones para o HTML
+  faUser = faUser;
+  faShoppingCart = faShoppingCart;
+  faSignOutAlt = faSignOutAlt; // Ícone de Sair
+
+  // Variável para "escutar" o status do usuário
+  currentUser$: Observable<User | null>;
+
+  // Injete o serviço de autenticação
+  constructor(private authService: AuthService) {
+    // Conecte a variável local ao "cérebro" do serviço
+    this.currentUser$ = this.authService.currentUser$;
+  }
+
+  // Método que o botão "Sair" vai chamar
+  logout(): void {
+    this.authService.logout();
+  }
 }

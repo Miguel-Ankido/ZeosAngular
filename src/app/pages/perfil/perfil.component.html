@@ -1,0 +1,72 @@
+<div class="perfil-container">
+
+  <aside class="perfil-sidebar">
+    <div class="perfil-avatar">
+      <fa-icon [icon]="faUserCircle"></fa-icon>
+    </div>
+    <button (click)="fazerLogout()" class="botao-logout">
+      Sair
+    </button>
+  </aside>
+
+  <main class="perfil-content">
+    <form *ngIf="usuario">
+      
+      <div class="form-group">
+        <label for="nome">Nome Completo *</label>
+        <input type="text" id="nome" [value]="usuario.nomeCompleto" readonly>
+      </div>
+      <div class="form-group">
+        <label for="endereco">Endereço *</label>
+        <input type="text" id="endereco" [value]="usuario.rua + ', ' + usuario.numero + ', ' + usuario.bairro + ' - ' + usuario.cidade" readonly>
+      </div>
+
+      <h3 class="secao-titulo">Formas de Pagamento</h3>
+      
+      <button 
+        *ngIf="!exibirFormularioCartao"
+        type="button" 
+        class="add-cartao-btn"
+        (click)="mostrarFormularioCartao()"> <fa-icon [icon]="faCreditCard"></fa-icon>
+        Adicionar Cartão de Crédito
+      </button>
+
+      <div *ngIf="!exibirFormularioCartao" class="cartao-placeholder">
+        Nenhum cartão salvo.
+      </div>
+
+      <div *ngIf="exibirFormularioCartao" class="novo-cartao-form">
+        <h4 class="form-titulo-cartao">Novo Cartão de Crédito</h4>
+        
+        <div class="form-group">
+          <label for="cartao-numero">Número do Cartão</label>
+          <input type="text" id="cartao-numero" placeholder="0000 0000 0000 0000" 
+                 [(ngModel)]="novoCartao.numero" name="cartao-numero">
+        </div>
+        
+        <div class="form-group">
+          <label for="cartao-nome">Nome no Cartão</label>
+          <input type="text" id="cartao-nome" placeholder="JOÃO S."
+                 [(ngModel)]="novoCartao.nome" name="cartao-nome">
+        </div>
+
+        <div class="form-group">
+          <label for="cartao-validade">Validade (MM/AA)</label>
+          <input type="text" id="cartao-validade" placeholder="02/30" 
+                 class="input-pequeno"
+                 [(ngModel)]="novoCartao.validade" name="cartao-validade">
+        </div>
+
+        <div class="botoes-form">
+          <button type="button" class="btn-salvar" (click)="salvarCartao()">
+            Salvar
+          </button>
+          <button type="button" class="btn-cancelar" (click)="ocultarFormularioCartao()">
+            Cancelar
+          </button>
+        </div>
+      </div>
+      
+    </form>
+  </main>
+</div>

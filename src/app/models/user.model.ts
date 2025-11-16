@@ -10,4 +10,5 @@ export interface User {
   cep: string;
   cidade: string;
   isAdmin?: boolean; 
+  cartoes?: any[];
 }

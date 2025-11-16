@@ -1,0 +1,180 @@
+/* Fundo cinza da página inteira */
+:host {
+  display: block;
+  background-color: #f4f4f4;
+  padding: 40px 0; /* Espaçamento em cima/baixo */
+  font-family: Arial, sans-serif;
+  min-height: 80vh;
+}
+
+/* Container principal que alinha as duas colunas */
+.perfil-container {
+  display: flex;
+  max-width: 900px; /* Largura total do layout */
+  margin: 0 auto;
+  gap: 30px; /* Espaço entre as colunas */
+  padding: 0 20px;
+}
+
+/* --- Coluna da Esquerda --- */
+.perfil-sidebar {
+  flex-basis: 250px; /* Largura fixa da coluna */
+  flex-shrink: 0; /* Não deixa a coluna encolher */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.perfil-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%; /* Faz o círculo */
+  background-color: #d8d8d8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 80px; /* Tamanho do ícone de usuário */
+  margin-bottom: 20px;
+}
+
+.botao-logout {
+  width: 100%;
+  padding: 12px;
+  background-color: #555; /* Cinza escuro */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.botao-logout:hover {
+  background-color: #333;
+}
+
+/* --- Coluna da Direita --- */
+.perfil-content {
+  flex-grow: 1; /* Ocupa o resto do espaço */
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.form-group input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9; /* Fundo cinza por ser 'readonly' */
+  box-sizing: border-box; /* Garante que o padding não quebre o layout */
+  font-size: 1rem;
+  color: #555;
+}
+
+.secao-titulo {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.add-cartao-btn {
+  width: 100%;
+  padding: 20px;
+  font-size: 1rem;
+  color: #777;
+  background-color: #fff;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.2s;
+}
+
+.add-cartao-btn:hover {
+  border-color: #aaa;
+  color: #333;
+}
+
+.cartao-placeholder {
+  text-align: center;
+  margin-top: 20px;
+  color: #888;
+}
+/* --- Estilos do Novo Formulário de Cartão --- */
+
+.novo-cartao-form {
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+.form-titulo-cartao {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Faz o input de validade ficar menor */
+.input-pequeno {
+  max-width: 150px;
+}
+
+/* --- Estilos dos Botões Salvar/Cancelar --- */
+
+.botoes-form {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Estilo base do botão */
+.botoes-form button {
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+/* Botão Salvar (Verde) */
+.btn-salvar {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-salvar:hover {
+  background-color: #218838;
+}
+
+/* Botão Cancelar (Cinza) */
+.btn-cancelar {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-cancelar:hover {
+  background-color: #5a6268;
+}

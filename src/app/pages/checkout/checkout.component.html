@@ -1,0 +1,82 @@
+<div class="checkout-container">
+  
+  <h1 class="titulo-pagina">Finalizar Pedido</h1>
+
+  <div class="checkout-content">
+
+    <main class="coluna-principal">
+
+      <section class="card" *ngIf="usuario">
+        <h2>Informações Pessoais</h2>
+        <div class="info-linha">
+          <strong>Nome:</strong>
+          <span>{{ usuario.nomeCompleto }}</span>
+        </div>
+        <div class="info-linha">
+          <strong>Email:</strong>
+          <span>{{ usuario.email }}</span>
+        </div>
+        <div class="info-linha">
+          <strong>Endereço:</strong>
+          <span>{{ usuario.rua }}, {{ usuario.numero }} - {{ usuario.bairro }}</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Forma de Pagamento</h2>
+        
+        <div class="opcoes-pagamento">
+          <div 
+            class="opcao-pagamento" 
+            [class.selecionado]="metodoPagamentoSelecionado === 'pix'"
+            (click)="selecionarPagamento('pix')">
+            <fa-icon [icon]="faBarcode"></fa-icon>
+            <div>
+              <strong>Pix</strong>
+              <small>(Aprovação imediata)</small>
+            </div>
+          </div>
+          
+          <div *ngIf="usuario && usuario.cartoes">
+            <div 
+              *ngFor="let cartao of usuario.cartoes"
+              class="opcao-pagamento" 
+              [class.selecionado]="metodoPagamentoSelecionado === cartao.id"
+              (click)="selecionarPagamento(cartao.id)">
+              <fa-icon [icon]="faCreditCard"></fa-icon>
+              <div>
+                <strong>Final •••• {{ cartao.numero.slice(-4) }}</strong>
+                <small>{{ cartao.nome }} - Val: {{ cartao.validade }}</small>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <a routerLink="/perfil" class="link-adicionar-cartao">+ Adicionar novo cartão</a>
+      </section>
+
+    </main>
+
+    <aside class="coluna-resumo">
+      <section class="card">
+        <h2>Resumo do Pedido</h2>
+        <div class="linha-resumo">
+          <span>Subtotal:</span>
+          <span>{{ totalDoCarrinho | currency:'BRL' }}</span>
+        </div>
+        <div class="linha-resumo">
+          <span>Frete:</span>
+          <span>R$ 0,00</span>
+        </div>
+        <div class="linha-resumo total">
+          <strong>Total:</strong>
+          <strong>{{ totalDoCarrinho | currency:'BRL' }}</strong>
+        </div>
+        <button class="btn-finalizar" (click)="finalizarCompra()">
+          Finalizar Compra
+        </button>
+      </section>
+    </aside>
+  </div>
+</div>

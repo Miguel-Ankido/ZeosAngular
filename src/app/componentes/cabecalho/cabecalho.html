@@ -1,8 +1,9 @@
 <header class="app-header">
+
   <div class="header-top">
     
     <div class="logo">
-      <a href="/">
+      <a routerLink="/">
         <img src="logo.png" alt="Logo ZEOS" class="logo-img" />
       </a>
     </div>
@@ -13,21 +14,33 @@
     </form>
     
     <div class="header-actions">
-      <a routerLink="/login" class="action-link">
-        <fa-icon [icon]="faUser"></fa-icon>
+      <ng-container *ngIf="(currentUser$ | async) as user; else loggedOutTemplate">
         
-      </a>
-      <a routerLink="/carrinho" class="action-link">
-        <fa-icon [icon]="faShoppingCart"></fa-icon>
-    
-      </a>
+        <a routerLink="/perfil" class="action-link" title="Minha Conta">
+          <fa-icon [icon]="faUser"></fa-icon>
+        </a>
+        <a routerLink="/carrinho" class="action-link" title="Carrinho">
+          <fa-icon [icon]="faShoppingCart"></fa-icon>
+        </a>
+        <a (click)="logout()" class="action-link" style="cursor: pointer;" title="Sair">
+          <fa-icon [icon]="faSignOutAlt"></fa-icon>
+        </a>
+
+      </ng-container>
+
+      <ng-template #loggedOutTemplate>
+        <a routerLink="/login" class="action-link" title="Login / Cadastro">
+          <fa-icon [icon]="faUser"></fa-icon>
+        </a>
+        <a routerLink="/carrinho" class="action-link" title="Carrinho">
+          <fa-icon [icon]="faShoppingCart"></fa-icon>
+        </a>
+      </ng-template>
     </div>
-  </div>
-  
-  <nav class="header-nav">
+
+  </div> <nav class="header-nav">
     <a routerLink="/">Home</a>
     <a routerLink="/sobre">Sobre</a>
     <a routerLink="/loja">Loja</a>
     <a routerLink="/ajuda">Ajuda</a>
-  </nav>
-</header>
+  </nav> </header>
