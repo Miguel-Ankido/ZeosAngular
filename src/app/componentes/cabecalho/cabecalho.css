@@ -105,3 +105,15 @@
   font-weight: 500;
   font-size: 0.9rem;
 }
+/* --- Estilos do Link de Admin --- */
+
+.admin-link {
+  font-size: 0.9rem !important;
+  font-weight: 600;
+  color: #d9534f !important; /* Vermelho */
+  text-transform: uppercase;
+}
+
+.admin-link:hover {
+  color: #c9302c !important; /* Vermelho mais escuro */
+}

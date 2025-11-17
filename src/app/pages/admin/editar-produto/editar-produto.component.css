@@ -1,0 +1,142 @@
+:host {
+  display: block;
+  background-color: #f4f4f4;
+  padding: 40px 0;
+  min-height: 80vh;
+  font-family: Arial, sans-serif;
+}
+
+.admin-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.titulo-pagina {
+  font-size: 1.75rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 24px 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.link-adicionar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #007bff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 25px;
+}
+
+.link-adicionar fa-icon {
+  font-size: 0.8rem;
+}
+
+.form-group {
+  width: 100%;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.titulo-form-edicao {
+  margin-top: 30px;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+  font-weight: 600;
+}
+
+/* --- Estilos do Formulário de Edição --- */
+
+.form-edicao {
+  margin-top: 30px;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}
+
+.titulo-form-edicao {
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.form-edicao .form-group {
+  margin-bottom: 15px;
+}
+
+.form-edicao .form-group label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.form-edicao .form-group input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* Importante */
+}
+
+/* --- Botões de Ação --- */
+.botoes-form {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.botoes-form button {
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+/* Botão Salvar (Verde) */
+.btn-salvar {
+  background-color: #28a745;
+  color: white;
+}
+.btn-salvar:hover {
+  background-color: #218838;
+}
+.btn-salvar:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+/* Botão Excluir (Vermelho) */
+.btn-excluir {
+  background-color: #e74c3c;
+  color: white;
+}
+.btn-excluir:hover {
+  background-color: #c0392b;
+}

@@ -16,6 +16,13 @@
     <div class="header-actions">
       <ng-container *ngIf="(currentUser$ | async) as user; else loggedOutTemplate">
         
+        <a *ngIf="user.isAdmin" 
+           routerLink="/admin/editar_produto" 
+           class="action-link admin-link" 
+           title="Painel do Admin">
+          Admin
+        </a>
+        
         <a routerLink="/perfil" class="action-link" title="Minha Conta">
           <fa-icon [icon]="faUser"></fa-icon>
         </a>
@@ -25,8 +32,8 @@
         <a (click)="logout()" class="action-link" style="cursor: pointer;" title="Sair">
           <fa-icon [icon]="faSignOutAlt"></fa-icon>
         </a>
-
-      </ng-container>
+        
+        </ng-container>
 
       <ng-template #loggedOutTemplate>
         <a routerLink="/login" class="action-link" title="Login / Cadastro">
