@@ -1,0 +1,155 @@
+/* Estilos baseados nas classes do seu editar-produto.component.html */
+/* Você pode copiar os estilos exatos do seu editar-produto.component.css para cá */
+
+.admin-container {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 2rem auto;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.titulo-pagina {
+  text-align: center;
+  color: #333;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.card {
+  background-color: #ffffff;
+  padding: 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.link-adicionar {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  transition: background-color 0.3s ease;
+}
+
+.link-adicionar:hover {
+  background-color: #0056b3;
+}
+
+.link-adicionar fa-icon {
+  margin-right: 0.5rem;
+}
+
+.form-edicao {
+  border-top: 1px solid #eee;
+  padding-top: 2rem;
+  margin-top: 1rem;
+}
+
+.titulo-form-edicao {
+  font-size: 1.5rem;
+  color: #444;
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
+/* Novo: Classe para agrupar campos lado-a-lado */
+.form-row {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.form-row .form-group {
+  flex: 1; /* Faz com que os grupos de formulário dividam o espaço */
+}
+/* Fim do Novo */
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box; /* Garante que o padding não quebre o layout */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.botoes-form {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-salvar,
+.btn-excluir {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-salvar {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-salvar:hover {
+  background-color: #218838;
+}
+
+.btn-salvar:disabled {
+  background-color: #a3d9b1;
+  cursor: not-allowed;
+}
+
+.btn-excluir {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-excluir:hover {
+  background-color: #c82333;
+}
+
+/* Media Query para telas menores */
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column;
+    gap: 0; /* Remove o gap no modo coluna */
+  }
+}

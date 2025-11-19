@@ -1,4 +1,4 @@
-/* Fundo e padding do cabeçalho */
+
 .app-header {
   width: 100%;
   padding: 0 5%;
@@ -8,33 +8,43 @@
   font-family: Arial, sans-serif;
 }
 
-/* --- 1. Bloco do Topo (Logo, Pesquisa, Ícones) --- */
+
 .header-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 80px; /* Altura fixa para o topo */
+  height: 80px; 
 }
 
-/* --- Correção da Logo --- */
+
 .logo {
-  height: 100%; /* O container da logo ocupa os 80px */
+  height: 100%; 
+  width: 150px;
   display: flex;
   align-items: center;
+  justify-content: flex-start; 
+}
+
+
+.logo a {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
 }
 
 .logo-img {
-  height: 100%; /* A imagem encolhe para caber nos 80px */
-  width: auto;
+
+  max-height: 193px; 
+  width: auto;     
   object-fit: contain;
 }
 
-/* --- 2. Barra de Pesquisa (CORRIGIDO) --- */
 .search-bar {
   display: flex;
   flex-grow: 1;
-  margin: 0 40px; /* Margem correta */
-  max-width: 600px; /* Largura máxima correta */
+  margin: 0 40px; 
+  max-width: 600px; 
   border: 1px solid #ccc;
   border-radius: 4px;
   overflow: hidden;
@@ -63,7 +73,7 @@
   background-color: #333;
 }
 
-/* --- 3. Bloco dos Ícones --- */
+
 .header-actions {
   display: flex;
   align-items: center;
@@ -90,7 +100,7 @@
   font-size: 1.5rem;
 }
 
-/* --- 4. Bloco da Navegação (Home, Sobre...) --- */
+
 .header-nav {
   display: flex;
   justify-content: center;
@@ -105,15 +115,15 @@
   font-weight: 500;
   font-size: 0.9rem;
 }
-/* --- Estilos do Link de Admin --- */
+
 
 .admin-link {
   font-size: 0.9rem !important;
   font-weight: 600;
-  color: #d9534f !important; /* Vermelho */
+  color: #d9534f !important; 
   text-transform: uppercase;
 }
 
 .admin-link:hover {
-  color: #c9302c !important; /* Vermelho mais escuro */
+  color: #c9302c !important;
 }

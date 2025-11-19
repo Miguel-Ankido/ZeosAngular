@@ -14,6 +14,7 @@ import { PerfilComponent } from './pages/perfil/perfil.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { adminGuard } from './guards/admin-guard';
 import { EditarProdutoComponent } from './pages/admin/editar-produto/editar-produto.component';
+import { AdicionarProdutoComponent } from './pages/admin/adicionar-produto/adicionar-produto.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -25,7 +26,8 @@ export const routes: Routes = [
   { path: 'produto/:id', component: ProdutoComponent },
   { path: 'perfil', component: PerfilComponent, canActivate: [ authGuard ] },
   { path: 'checkout', component: CheckoutComponent, canActivate: [ authGuard ] },
-  { path: 'admin/editar-produto', component: EditarProdutoComponent, canActivate: [ adminGuard ] },
+  { path: 'admin/editar_produto', component: EditarProdutoComponent, canActivate: [ adminGuard ] },
+  {path: 'admin/adicionar_produto',component: AdicionarProdutoComponent,canActivate: [adminGuard] },
   { path: 'carrinho', component: CarrinhoComponent },
   { path: 'esqueci-senha', component: EsqueciSenhaComponent },
   { path: '**', component: ErroComponent }

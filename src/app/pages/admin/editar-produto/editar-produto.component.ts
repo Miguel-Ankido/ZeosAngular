@@ -1,15 +1,16 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core'; // <--- O PLATFORM_ID DEVE ESTAR AQUI
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FormsModule } from '@angular/forms'; 
 import { ToastrService } from 'ngx-toastr';
-import { ProductService, Produto } from '../../../services/product.service';
+import { ProductService, Produto } from '../../../services/product.service'; // Verifique se este caminho está certo para você
+import { RouterModule } from '@angular/router';
     
 @Component({
   selector: 'app-editar-produto',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule, FormsModule], 
+  imports: [CommonModule, FontAwesomeModule, FormsModule, RouterModule], 
   templateUrl: './editar-produto.component.html',
   styleUrl: './editar-produto.component.css'
 })
@@ -22,21 +23,21 @@ export class EditarProdutoComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private toastr: ToastrService,
-    @Inject(PLATFORM_ID) private platformId: Object 
+    @Inject(PLATFORM_ID) private platformId: Object // <--- O ERRO GERALMENTE VEM DAQUI SE O IMPORT FALTAR
   ) {}
     
   ngOnInit(): void {
-    // --- CORREÇÃO FINAL DO ERRO 500 ---
-    // Só carrega os produtos se estiver no navegador.
-    // Isso impede o SSR de fazer a chamada HTTP.
-    if (isPlatformBrowser(this.platformId)) {
-      this.carregarProdutos();
-    }
+    this.carregarProdutos();
   }
     
   carregarProdutos(): void {
-    this.productService.getProdutos().subscribe(data => {
-      this.produtos = data;
+    this.productService.getProdutos().subscribe({
+      next: (data) => {
+        this.produtos = data;
+      },
+      error: (err) => {
+        console.error('Erro ao carregar produtos', err);
+      }
     });
   }
     
@@ -59,7 +60,8 @@ export class EditarProdutoComponent implements OnInit {
       next: () => {
         if (isPlatformBrowser(this.platformId)) {
           this.toastr.success('Produto atualizado com sucesso!');
-          (document.getElementById('produto-select') as HTMLSelectElement).value = "";
+          const select = document.getElementById('produto-select') as HTMLSelectElement;
+          if(select) select.value = "";
         }
         this.carregarProdutos();
         this.produtoSelecionado = null;
@@ -88,7 +90,8 @@ export class EditarProdutoComponent implements OnInit {
       next: () => {
         if (isPlatformBrowser(this.platformId)) {
           this.toastr.success('Produto excluído com sucesso!');
-          (document.getElementById('produto-select') as HTMLSelectElement).value = "";
+          const select = document.getElementById('produto-select') as HTMLSelectElement;
+          if(select) select.value = "";
         }
         this.carregarProdutos();
         this.produtoSelecionado = null;

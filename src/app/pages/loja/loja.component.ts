@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProductListComponent } from '../../componentes/product-list/product-list.component';
 import { PaginationComponent } from '../../componentes/pagination/pagination.component';
 import { ToastrService } from 'ngx-toastr';
-
-// 1. Importe o Serviço de Produtos
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService, Produto } from '../../services/product.service';
 
 @Component({
@@ -16,51 +15,79 @@ import { ProductService, Produto } from '../../services/product.service';
 })
 export class LojaComponent implements OnInit {
   
-  // 2. Estados para os dados
   products: Produto[] = [];
   loading: boolean = true;
-  
-  // 3. Estados para a Paginação
+
   currentPage: number = 1;
   totalPages: number = 0;
-  itemsPerPage: number = 8; // Queremos 8 por página
+  itemsPerPage: number = 8;
 
-  // 4. Injeta os Serviços
+  termoBusca: string | null = null;
+
   constructor(
     private productService: ProductService,
+    private route: ActivatedRoute,
+    private router: Router,
     private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
-    this.loadProducts(); // Carrega os produtos da primeira página
+    // Quando a rota muda, recarrega (search ou página)
+    this.route.queryParams.subscribe(params => {
+      this.termoBusca = params['search'] || null;
+      this.currentPage = Number(params['page']) || 1;
+
+      this.loadProducts();
+    });
   }
 
-  // 5. Função que busca os produtos da API
   loadProducts(): void {
     this.loading = true;
+
+    // 🔎 Se existir busca, carrega a busca
+    if (this.termoBusca && this.termoBusca.trim() !== '') {
+      this.productService.buscarProdutos(this.termoBusca, this.currentPage, this.itemsPerPage)
+        .subscribe({
+          next: (response) => {
+            const totalCount = Number(response.headers.get('X-Total-Count'));
+            this.totalPages = Math.ceil(totalCount / this.itemsPerPage);
+
+            this.products = response.body || [];
+            this.loading = false;
+          },
+          error: () => {
+            this.toastr.error("Erro ao buscar produtos.");
+            this.loading = false;
+          }
+        });
+
+      return;
+    }
+
+    // 🛍️ Caso contrário, lista normal
     this.productService.getProdutosPaginados(this.currentPage, this.itemsPerPage)
       .subscribe({
         next: (response) => {
-          // 6. Pega o total do Header (X-Total-Count)
           const totalCount = Number(response.headers.get('X-Total-Count'));
           this.totalPages = Math.ceil(totalCount / this.itemsPerPage);
-          
-          // 7. Pega os produtos do 'body'
+
           this.products = response.body || [];
           this.loading = false;
         },
-        error: (err) => {
-          console.error("Erro ao buscar produtos:", err);
+        error: () => {
           this.toastr.error('Erro ao carregar os produtos.');
           this.loading = false;
         }
       });
   }
 
-  // 8. Função que será chamada pelo componente Pagination
+  // 🔄 Quando muda de página
   onPageChange(page: number): void {
-    this.currentPage = page; // Atualiza a página atual
-    this.loadProducts();     // Busca os produtos da nova página
-    window.scrollTo(0, 0);  // Rola para o topo
+    this.router.navigate([], {
+      queryParams: {
+        page: page,
+        search: this.termoBusca || null
+      }
+    });
   }
 }

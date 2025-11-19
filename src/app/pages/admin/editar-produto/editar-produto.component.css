@@ -140,3 +140,34 @@
 .btn-excluir:hover {
   background-color: #c0392b;
 }
+
+.btn-adicionar {
+  background-color: #000000; /* Fundo preto */
+  color: #ffffff;            /* Texto branco */
+  padding: 8px 20px;        /* Espaçamento interno para parecer um botão gordo */
+  border-radius: 5px;        /* Cantos arredondados */
+  text-decoration: none;     /* Remove o sublinhado de link */
+  display: inline-flex;      /* Alinha ícone e texto */
+  align-items: center;
+  gap: 8px;                 /* Espaço entre o ícone (+) e o texto */
+  font-weight: bold;
+  font-size: 1rem;
+  border: 2px solid #000000;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  
+  /* Sombra suave para dar destaque */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Efeito ao passar o mouse */
+.btn-adicionar:hover {
+  background-color: #333333; /* Cinza escuro */
+  transform: translateY(-2px); /* Leve subida */
+  box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+}
+
+/* Efeito ao clicar */
+.btn-adicionar:active {
+  transform: translateY(0);
+}

@@ -3,56 +3,76 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Produto {
-  id: string;
-  name: string;
-  oldPrice: string | null;
-  price: string;
-  image: string;
-  rating: number;
-  estoque: number;
-  sku: string;
-  categoria: string;
-  descricao_curta: string;
-  descricao_longa: string;
-  material: string;
+  id: string;
+  name: string;
+  oldPrice: string | null;
+  price: string;
+  image: string;
+  rating: number;
+  estoque: number;
+  sku: string;
+  categoria: string;
+  descricao_curta: string;
+  descricao_longa: string;
+  material: string;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root'
 })
 export class ProductService {
-  private API_URL = 'https://api-1-6p1t.onrender.com';
 
-  constructor(private http: HttpClient) { }
+  private API_URL = 'https://api-1-6p1t.onrender.com';
 
-  getProdutos(): Observable<Produto[]> {
-    return this.http.get<Produto[]>(`${this.API_URL}/produtos`);
-  }
+  constructor(private http: HttpClient) {}
 
-  getProdutosPaginados(page: number, limit: number): Observable<HttpResponse<Produto[]>> {
-    return this.http.get<Produto[]>(
-      `${this.API_URL}/produtos?_page=${page}&_limit=${limit}`,
-      { observe: 'response' }
-    );
-  }
+  // 📌 Listagem SEM paginação
+  getProdutos(): Observable<Produto[]> {
+    return this.http.get<Produto[]>(`${this.API_URL}/produtos`);
+  }
 
-  getProdutoById(id: string): Observable<Produto> {
-    return this.http.get<Produto>(`${this.API_URL}/produtos/${id}`);
-  }
+  // 📌 Listagem COM paginação
+  getProdutosPaginados(page: number, limit: number): Observable<HttpResponse<Produto[]>> {
+    return this.http.get<Produto[]>(
+      `${this.API_URL}/produtos?_page=${page}&_limit=${limit}`,
+      { observe: 'response' }
+    );
+  }
 
-  getReviewsByProductId(id: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.API_URL}/reviews?produtoId=${id}`);
-  }
+  // 🔍 **BUSCA COM paginação** (usada no LojaComponent)
+  buscarProdutos(termo: string, page: number, limit: number): Observable<HttpResponse<Produto[]>> {
+    return this.http.get<Produto[]>(
+      `${this.API_URL}/produtos?q=${termo}&_page=${page}&_limit=${limit}`,
+      { observe: 'response' }
+    );
+  }
 
-  postReview(reviewData: any): Observable<any> {
-    return this.http.post(`${this.API_URL}/reviews`, reviewData);
-  }
+  // 🔍 Busca simples sem paginação (caso queira usar em outro lugar)
+  searchProdutos(termo: string): Observable<Produto[]> {
+    return this.http.get<Produto[]>(`${this.API_URL}/produtos?q=${termo}`);
+  }
 
-  updateProduto(id: string, produtoData: Produto): Observable<Produto> {
-    return this.http.put<Produto>(`${this.API_URL}/produtos/${id}`, produtoData);
-  }
+  getProdutoById(id: string): Observable<Produto> {
+    return this.http.get<Produto>(`${this.API_URL}/produtos/${id}`);
+  }
 
-  deleteProduto(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.API_URL}/produtos/${id}`);
-  }
+  getReviewsByProductId(id: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.API_URL}/reviews?produtoId=${id}`);
+  }
+
+  postReview(reviewData: any): Observable<any> {
+    return this.http.post(`${this.API_URL}/reviews`, reviewData);
+  }
+
+  updateProduto(id: string, produtoData: Produto): Observable<Produto> {
+    return this.http.put<Produto>(`${this.API_URL}/produtos/${id}`, produtoData);
+  }
+
+  deleteProduto(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.API_URL}/produtos/${id}`);
+  }
+
+  createProduto(produtoData: Produto): Observable<Produto> {
+    return this.http.post<Produto>(`${this.API_URL}/produtos`, produtoData);
+  }
 }

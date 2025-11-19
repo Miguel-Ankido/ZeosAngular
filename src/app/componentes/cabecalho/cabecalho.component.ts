@@ -1,42 +1,48 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common'; // Precisa disso para *ngIf
+import { Router, RouterLink } from '@angular/router'; 
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms'; 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faUser, faShoppingCart, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'; // Importe os 3 ícones
-
-// Imports para o Login
+import { faUser, faShoppingCart, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user.model';
 
 @Component({
-  selector: 'app-cabecalho',
-  standalone: true,
-  imports: [
-    CommonModule, 
-    FontAwesomeModule, 
-    RouterLink
-  ], 
-  templateUrl: './cabecalho.html',
-  styleUrl: './cabecalho.css'
+  selector: 'app-cabecalho',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FontAwesomeModule,
+    RouterLink,
+    FormsModule 
+  ],
+  templateUrl: './cabecalho.html', // Verifique se o nome é .html ou .component.html no seu arquivo real
+  styleUrl: './cabecalho.css'
 })
 export class CabecalhoComponent {
-  // Exponha os 3 ícones para o HTML
-  faUser = faUser;
-  faShoppingCart = faShoppingCart;
-  faSignOutAlt = faSignOutAlt; // Ícone de Sair
+  faUser = faUser;
+  faShoppingCart = faShoppingCart;
+  faSignOutAlt = faSignOutAlt;
 
-  // Variável para "escutar" o status do usuário
-  currentUser$: Observable<User | null>;
+  currentUser$: Observable<User | null>;
+  termoBusca: string = ''; 
+  constructor(private authService: AuthService, private router: Router) {
+    this.currentUser$ = this.authService.currentUser$;
+  }
 
-  // Injete o serviço de autenticação
-  constructor(private authService: AuthService) {
-    // Conecte a variável local ao "cérebro" do serviço
-    this.currentUser$ = this.authService.currentUser$;
-  }
+  logout(): void {
+    this.authService.logout();
+  }
 
-  // Método que o botão "Sair" vai chamar
-  logout(): void {
-    this.authService.logout();
-  }
+
+  buscar(): void {
+    if (this.termoBusca.trim()) {
+     
+      this.router.navigate(['/loja'], { queryParams: { search: this.termoBusca } });
+      
+    
+      this.termoBusca = ''; 
+    }
+  }
 }
