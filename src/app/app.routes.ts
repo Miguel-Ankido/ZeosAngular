@@ -23,7 +23,7 @@ export const routes: Routes = [
   { path: 'ajuda', component: AjudaComponent },
   { path: 'login', component: LoginComponent },
   { path: 'cadastro', component: CadastroComponent },
-  { path: 'produto/:id', component: ProdutoComponent },
+  { path: 'produto/:id', component: ProdutoComponent, data: { renderMode: 'ssr' } },
   { path: 'perfil', component: PerfilComponent, canActivate: [ authGuard ] },
   { path: 'checkout', component: CheckoutComponent, canActivate: [ authGuard ] },
   { path: 'admin/editar_produto', component: EditarProdutoComponent, canActivate: [ adminGuard ] },
