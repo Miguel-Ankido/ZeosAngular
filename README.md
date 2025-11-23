@@ -1,59 +1,118 @@
 # ZeosAngular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.9.
+ZeosAngular is a modern e-commerce web application built with **Angular 20** and **Server-Side Rendering (SSR)**. It provides a seamless shopping experience with features like product browsing, shopping cart management, user authentication, and an admin dashboard for product management.
 
-## Development server
+## 🚀 Features
 
-To start a local development server, run:
+- **Product Catalog**: Browse products with pagination and search functionality.
+- **Product Details**: Detailed product views with server-side rendering for better SEO.
+- **Shopping Cart**: Add, remove, and update items in the cart.
+- **Checkout**: Secure checkout process for authenticated users.
+- **User Authentication**: Login, registration, and password recovery.
+- **User Profile**: Manage user information and view order history.
+- **Admin Panel**: Add and edit products (protected by Admin Guard).
+- **Reviews**: Read and submit product reviews.
+- **Responsive Design**: Optimized for various screen sizes.
 
-```bash
-ng serve
+## 🛠️ Tech Stack
+
+- **Frontend Framework**: [Angular 20](https://angular.io/)
+- **Server-Side Rendering**: @angular/ssr (Express.js)
+- **Styling**: CSS, [FontAwesome](https://fontawesome.com/)
+- **Notifications**: [ngx-toastr](https://www.npmjs.com/package/ngx-toastr)
+- **HTTP Client**: Angular HttpClient
+- **API**: External REST API (`https://api-1-6p1t.onrender.com`)
+
+## 📂 Project Structure
+
+```
+src/
+├── app/
+│   ├── componentes/       # Reusable UI components (Header, Product Card, etc.)
+│   ├── guards/            # Route guards (AuthGuard, AdminGuard)
+│   ├── models/            # TypeScript interfaces/models
+│   ├── pages/             # Application pages (Home, Shop, Login, etc.)
+│   ├── services/          # Services for API communication and state management
+│   ├── app.routes.ts      # Application routing configuration
+│   └── ...
+├── assets/                # Static assets (images, icons)
+└── styles.css             # Global styles
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## ⚙️ Installation & Setup
 
-## Code scaffolding
+1.  **Clone the repository:**
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+    ```bash
+    git clone <repository-url>
+    cd zeos-angular
+    ```
+
+2.  **Install dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+3.  **Start the development server:**
+
+    ```bash
+    npm start
+    # or
+    ng serve
+    ```
+
+    Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+## 🏗️ Build & Deployment
+
+### Build for Production
+
+To build the project for production:
 
 ```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
+npm run build
+# or
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+### Server-Side Rendering (SSR)
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+To serve the application with SSR:
 
 ```bash
+npm run serve:ssr:zeos-angular
+```
+
+## 🧪 Testing
+
+### Unit Tests
+
+Run unit tests using [Karma](https://karma-runner.github.io):
+
+```bash
+npm test
+# or
 ng test
 ```
 
-## Running end-to-end tests
+## 🔑 API Endpoints
 
-For end-to-end (e2e) testing, run:
+The application connects to an external API hosted at `https://api-1-6p1t.onrender.com`.
+Key endpoints include:
 
-```bash
-ng e2e
-```
+-   `GET /produtos`: List products
+-   `GET /produtos/:id`: Get product details
+-   `GET /reviews`: Get product reviews
+-   `POST /auth/login`: User login
+-   `POST /auth/register`: User registration
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 🛡️ Guards
 
-## Additional Resources
+-   **AuthGuard**: Protects routes like Profile and Checkout, ensuring only logged-in users can access them.
+-   **AdminGuard**: Protects Admin routes for adding and editing products.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+Generated with Angular CLI version 20.3.9.
